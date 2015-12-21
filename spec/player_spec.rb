@@ -28,19 +28,16 @@ RSpec.describe Player do
 
   describe "#secret_hand_empty?" do
     it "returns true if their secret hand is empty" do
+      subject.secret_hand.cards.clear
+
       expect(subject.secret_hand_empty?).to be true
     end
     it "returns false if their secret hand isn't empty" do
-      subject.draw_five_cards
       expect(subject.secret_hand_empty?).to be false
     end
   end
 
   describe "#ask_for_card" do
-    before :each do
-      subject.draw_five_cards
-    end
-
     context "when asking a non-existant player" do
       it "returns nil" do
         expect(subject.ask_for_card("Non-existant", RubyCards::Card.new)).to be_nil
@@ -70,10 +67,6 @@ RSpec.describe Player do
   end
 
   describe "#transfer_card" do
-    before :each do
-      subject.draw_five_cards
-    end
-
     context "when involving a non-existant player" do
       it "returns nil if player_one doesn't exist" do
       end
