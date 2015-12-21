@@ -10,14 +10,23 @@ module GoFish
 
     def create_player(name)
       player = GoFish::Player.new(name)
-      player.secret_hand.draw(@deck,5)
+      player.draw_five_cards(@deck)
       @players.push(player)
+      return player
     end
 
     def pick_starting_player(num_players)
+      starter_index = rand(num_players)
+      return @players[starter_index]
     end
 
     def game_over?
+      @players.each do |player|
+        if !player.secret_hand_empty?
+          return false
+        end
+      end
+      return true
     end
 
     def turn(player)
