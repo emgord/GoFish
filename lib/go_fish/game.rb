@@ -10,7 +10,7 @@ module GoFish
 
     def create_player(name)
       player = GoFish::Player.new(name)
-      player.secret_hand.draw(@deck,5)
+      player.draw_five_cards(@deck)
       @players.push(player)
     end
 
