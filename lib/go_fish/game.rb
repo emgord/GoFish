@@ -15,9 +15,17 @@ module GoFish
     end
 
     def pick_starting_player(num_players)
+      starter_index = rand(num_players)
+      return @players[starter_index]
     end
 
     def game_over?
+      @players.each do |player|
+        if !player.secret_hand_empty?
+          return false
+        end
+      end
+      return true
     end
 
     def turn(player)
