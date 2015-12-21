@@ -4,7 +4,7 @@ module GoFish
 
     def initialize(name)
       @name = name
-      @secret_hand = Hand.new.drow(@deck, 5)
+      @secret_hand = Hand.new
       @table_hand = Hand.new
     end
 
