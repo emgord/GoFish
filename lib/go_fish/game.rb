@@ -23,11 +23,5 @@ module GoFish
     def turn(player)
     end
 
-    def secret_hand_empty?
-    end
-
-    def print_status
-    end
-
   end
 end
