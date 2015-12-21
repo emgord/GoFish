@@ -24,4 +24,14 @@ RSpec.describe Player do
       expect(subject.name).to be_a String
     end
   end
+
+  describe "#secret_hand_empty?" do
+    it "returns true if their secret hand is empty" do
+      expect(subject.secret_hand_empty?).to be true
+    end
+    it "returns false if their secret hand isn't empty" do
+      subject.draw_five_cards
+      expect(subject.secret_hand_empty?).to be false
+    end
+  end
 end
