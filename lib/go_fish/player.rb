@@ -29,7 +29,8 @@ module GoFish
     def transfer_card(player_one, player_two, card)
     end
 
-    def go_fish
+    def go_fish(deck)
+      @secret_hand.draw(deck,1)
     end
 
     def play_fours
