@@ -21,6 +21,9 @@ module GoFish
       # go fish
     end
 
+    def transfer_card(player_one, player_two, card)
+    end
+
     def go_fish
     end
 
