@@ -8,7 +8,13 @@ module GoFish
       @table_hand = Hand.new
     end
 
+    #emily
     def secret_hand_empty?
+      if @secret_hand.count == 0
+        true
+      else
+        false
+      end
     end
 
     def print_status
@@ -30,6 +36,7 @@ module GoFish
     def play_fours
     end
 
+    #emily
     def draw_five_cards
     end
 
