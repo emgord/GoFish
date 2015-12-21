@@ -1,7 +1,7 @@
 require "rubycards"
 include RubyCards
-require "./lib/game"
-require "./lib/player"
+require_relative "go_fish/game"
+require_relative "go_fish/player"
 
 
 puts "Welcome to Go Fish!"
