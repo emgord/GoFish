@@ -1,9 +1,11 @@
 require "spec_helper"
 
 Player = GoFish::Player
+Game = GoFish::Game
 
 RSpec.describe Player do
-  subject { Player.new("Test Player") }
+  let(:game) { Game.new(2) }
+  subject(:player1) { game.create_player("Test Player") }
 
   describe "attributes" do
     it "has a name" do
@@ -46,7 +48,7 @@ RSpec.describe Player do
     end
 
     context "when asking another player" do
-      let(:player2) { Player.new("Test Player 2") }
+      let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if we do not have this card" do
         card = find_card_not_in_hand(subject.secret_hand)
@@ -80,7 +82,7 @@ RSpec.describe Player do
     end
 
     context "when transferring to another player" do
-      let(:player2) { Player.new("Test Player 2") }
+      let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if player_one does not have this card" do
       end
