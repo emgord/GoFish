@@ -70,4 +70,30 @@ RSpec.describe Player do
       end
     end
   end
+
+  describe "#transfer_card" do
+    before :each do
+      subject.draw_five_cards
+    end
+
+    context "when involving a non-existant player" do
+      it "returns nil if player_one doesn't exist" do
+      end
+      it "returns nil if player_two doesn't exist" do
+      end
+    end
+
+    context "when transferring to another player" do
+      let(:player2) { Player.new("Test Player 2") }
+
+      it "returns nil if player_one does not have this card" do
+      end
+      it "returns true after transferring card between players" do
+      end
+      it "removes the card from player_one's hand" do
+      end
+      it "adds the card to player_two's hand" do
+      end
+    end
+  end
 end
