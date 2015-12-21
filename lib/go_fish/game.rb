@@ -14,5 +14,20 @@ module GoFish
       @players.push(player)
     end
 
+    def pick_starting_player(num_players)
+    end
+
+    def game_over?
+    end
+
+    def turn(player)
+    end
+
+    def secret_hand_empty?
+    end
+
+    def print_status
+    end
+
   end
 end
