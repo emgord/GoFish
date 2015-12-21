@@ -46,7 +46,7 @@ RSpec.describe Player do
     end
 
     context "when asking another player" do
-      let(:p2) { p2 = Player.new("Test Player 2") }
+      let(:player2) { Player.new("Test Player 2") }
 
       it "returns nil if we do not have this card" do
         card = RubyCards::Card.new(2, 'Club')
