@@ -49,11 +49,7 @@ RSpec.describe Player do
       let(:player2) { Player.new("Test Player 2") }
 
       it "returns nil if we do not have this card" do
-        card = RubyCards::Card.new(2, 'Club')
-        while subject.secret_hand.cards.include? card
-          card = RubyCards::Card.new(card.rank + 1, 'Club')
-        end
-
+        card = find_card_not_in_hand(subject.secret_hand)
         expect(subject.ask_for_card("Test Player 2", card)).to be_nil
       end
 
