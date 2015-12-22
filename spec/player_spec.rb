@@ -48,7 +48,7 @@ RSpec.describe Player do
       let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if we do not have the card" do
-        card = find_card_not_in_hand(subject.secret_hand)
+        card = find_card_not_in_hand(subject)
         expect(subject.ask_for_card("Test Player 2", card)).to be_nil
       end
 
@@ -99,7 +99,7 @@ RSpec.describe Player do
       let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if player_one does not have the card" do
-        card = find_card_not_in_hand(player1.secret_hand)
+        card = find_card_not_in_hand(player1)
         expect(player1.transfer_card(player1, player2, card)).to be_nil
       end
       it "returns true" do
