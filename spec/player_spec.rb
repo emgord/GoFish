@@ -38,30 +38,37 @@ RSpec.describe Player do
   end
 
   describe "#ask_for_card" do
-    context "when asking a non-existant player" do
-      it "returns nil" do
-        expect(subject.ask_for_card("Non-existant", RubyCards::Card.new)).to be_nil
+    context "when either player is nil" do
+      it "returns nil (player_one)" do
+        expect(subject.ask_for_card(nil, player1, find_card_in_hand(player1))).to be_nil
       end
+      it "returns nil (player_two)" do
+        expect(subject.ask_for_card(player1, nil, find_card_in_hand(player1))).to be_nil
+      end
+    end
+
+    it "returns nil when asking self" do
+      expect(subject.ask_for_card(player1, player1, find_card_in_hand(player1))).to be_nil
     end
 
     context "when asking another player" do
       let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if we do not have the card" do
-        card = find_card_not_in_hand(subject)
-        expect(subject.ask_for_card("Test Player 2", card)).to be_nil
+        card = find_card_not_in_hand(player1)
+        expect(subject.ask_for_card(player1, player2, card)).to be_nil
       end
 
       context "and that player has the card" do
-        let(:card) { player2.secret_hand.cards[0] }
+        let(:card) { find_card_in_hand(player2) }
 
         it "returns true" do
-          expect(subject.ask_for_card("Test Player 2", card)).to be true
+          expect(subject.ask_for_card(player1, player2, card)).to be true
         end
         it "transfers all of the same-ranked cards into Player's hand" do
           cards = player2.secret_hand.select { |c| c.rank == card.rank }
 
-          subject.ask_for_card("Test Player 2", card)
+          subject.ask_for_card(player1, player2, card)
 
           cards.each do |c|
             expect(player1.secret_hand).to include c
