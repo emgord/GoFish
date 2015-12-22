@@ -46,9 +46,6 @@ module GoFish
         end
     end
 
-
-    end
-
     def go_fish(deck)
       @secret_hand.draw(deck,1)
     end
