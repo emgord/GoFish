@@ -80,11 +80,19 @@ RSpec.describe Player do
   end
 
   describe "#transfer_card" do
+    let(:card) { find_card_in_hand(player1) }
+
     context "when involving a non-existant player" do
       it "returns nil if player_one doesn't exist" do
+        expect(subject.transfer_card(nil, player1, card)).to be_nil
       end
       it "returns nil if player_two doesn't exist" do
+        expect(subject.transfer_card(player1, nil, card)).to be_nil
       end
+    end
+
+    it "returns nil if both players are the same" do
+      expect(subject.transfer_card(player1, player1, card)).to be_nil
     end
 
     context "when transferring to another player" do
@@ -94,7 +102,7 @@ RSpec.describe Player do
         card = find_card_not_in_hand(player1.secret_hand)
         expect(player1.transfer_card(player1, player2, card)).to be_nil
       end
-      it "returns true after transferring card between players" do
+      it "returns true" do
       end
       it "removes the card from player_one's hand" do
       end
