@@ -30,17 +30,30 @@ module GoFish
     end
 
 
-    def ask_for_card(player_name, card)
-      # do you even have card?
-      # does that player have card?
-      # either take the card and repeat this method or
-      # go fish
+    def ask_for_card(player_one, player_two, chosen_card)
+      if !secret_hand_empty?
+        if have_cards?(player_one, chosen_card)
+          if have_cards?(player_two, chosen_card)
+            transfer_card(player_one, player_two, chosen_card)
+          else
+          puts "GO FISH!!!!!!!!!!!"
+          go_fish(game.deck)
+          end
+        else puts "You don't have that card"
+        end
+      else draw_five_cards(deck)
+      end
     end
+
+    def have_cards?(player, card)
+      return true if player.secret_hand.cards.include?(card)
+    end
+
 
     def transfer_card(player_one, player_two, chosen_card)
         player_two.cards.secret_hand.each do |card|
           if chosen_card == card
-            player_one.secret_cards.push(card)
+            player_one.secret_hand.push(card)
             player_two.cards.delete(card)
           end
         end
