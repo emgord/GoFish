@@ -78,9 +78,18 @@ RSpec.describe Player do
       end
 
       context "and that player doesn't have the card" do
+        let(:card) { find_card_not_in_hand(player2) }
+        before :each do
+          player1.secret_hand << card
+        end
+
         it "returns false if we do not fish the card" do
+          game.deck.cards.reject! { |c| c.rank == card.rank }
+          expect(subject.ask_for_card(player1, player2, card)).to be false
         end
         it "returns true if we DO fish the card" do
+          game.deck.cards.unshift(card)
+          expect(subject.ask_for_card(player1, player2, card)).to be true
         end
       end
     end
