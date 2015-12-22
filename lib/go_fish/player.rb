@@ -72,9 +72,9 @@ module GoFish
     end
 
     def move_to_table_hand(card_rank)
-      @secret_hand.cards.each do |card|
-        if card.rank == card_rank
-          @secret_hand.cards.pop(card)
+      @secret_hand.each do |card|
+        if card.rank.to_i == card_rank
+          @secret_hand.cards.delete(card)
           @table_hand.cards.push(card)
         end
       end
