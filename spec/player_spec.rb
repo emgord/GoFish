@@ -1,9 +1,11 @@
 require "spec_helper"
 
 Player = GoFish::Player
+Game = GoFish::Game
 
 RSpec.describe Player do
-  subject { Player.new("Test Player") }
+  let(:game) { Game.new(2) }
+  subject(:player1) { game.create_player("Test Player") }
 
   describe "attributes" do
     it "has a name" do
@@ -26,19 +28,16 @@ RSpec.describe Player do
 
   describe "#secret_hand_empty?" do
     it "returns true if their secret hand is empty" do
+      subject.secret_hand.cards.clear
+
       expect(subject.secret_hand_empty?).to be true
     end
     it "returns false if their secret hand isn't empty" do
-      subject.draw_five_cards
       expect(subject.secret_hand_empty?).to be false
     end
   end
 
   describe "#ask_for_card" do
-    before :each do
-      subject.draw_five_cards
-    end
-
     context "when asking a non-existant player" do
       it "returns nil" do
         expect(subject.ask_for_card("Non-existant", RubyCards::Card.new)).to be_nil
@@ -46,14 +45,10 @@ RSpec.describe Player do
     end
 
     context "when asking another player" do
-      let(:p2) { p2 = Player.new("Test Player 2") }
+      let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if we do not have this card" do
-        card = RubyCards::Card.new(2, 'Club')
-        while subject.secret_hand.cards.include? card
-          card = RubyCards::Card.new(card.rank + 1, 'Club')
-        end
-
+        card = find_card_not_in_hand(subject.secret_hand)
         expect(subject.ask_for_card("Test Player 2", card)).to be_nil
       end
 
@@ -67,6 +62,28 @@ RSpec.describe Player do
         end
         it "returns true if we DO fish this card" do
         end
+      end
+    end
+  end
+
+  describe "#transfer_card" do
+    context "when involving a non-existant player" do
+      it "returns nil if player_one doesn't exist" do
+      end
+      it "returns nil if player_two doesn't exist" do
+      end
+    end
+
+    context "when transferring to another player" do
+      let(:player2) { game.create_player("Test Player 2") }
+
+      it "returns nil if player_one does not have this card" do
+      end
+      it "returns true after transferring card between players" do
+      end
+      it "removes the card from player_one's hand" do
+      end
+      it "adds the card to player_two's hand" do
       end
     end
   end
