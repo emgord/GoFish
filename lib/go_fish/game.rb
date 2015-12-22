@@ -13,6 +13,7 @@ module GoFish
       player = GoFish::Player.new(name)
       player.draw_five_cards(@deck)
       @players.push(player)
+      return player
     end
 
     def pick_starting_player(num_players)

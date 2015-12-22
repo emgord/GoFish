@@ -17,7 +17,18 @@ module GoFish
     end
 
     def print_status
+      puts "#{self.name} secret cards are:"
+      puts self.secret_hand
+      puts "#{self.name} table cards are:"
+      puts self.table_hand
     end
+
+    def print_table_hand(players)
+      players.each do |player|
+        puts "#{player.name} has #{player.table_hand.count} cards on the table and #{player.secret_hand.count} secret cards"
+      end
+    end
+
 
     def ask_for_card(player_name, card)
       # do you even have card?
@@ -26,7 +37,13 @@ module GoFish
       # go fish
     end
 
-    def transfer_card(player_one, player_two, card)
+    def transfer_card(player_one, player_two, chosen_card)
+        player_two.cards.secret_hand.each do |card|
+          if chosen_card == card
+            player_one.secret_cards.push(card)
+            player_two.cards.delete(card)
+          end
+        end
     end
 
     def go_fish(deck)
@@ -34,6 +51,19 @@ module GoFish
     end
 
     def play_fours
+      @secret_hand.each do |card|
+    end
+
+    def hand_to_hash(hand)
+      hand_hash = {}
+      hand.each do |card|
+        if hand_hash[card]
+          hand_hash[card] += 1
+        else
+          hand_hash[card] = 1
+        end
+      end
+      return hand_hash
     end
 
     def draw_five_cards(deck)
