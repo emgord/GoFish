@@ -51,7 +51,6 @@ module GoFish
     end
 
     def play_fours
-      @secret_hand.each do |card|
     end
 
     def hand_to_hash(hand)
