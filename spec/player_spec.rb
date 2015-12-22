@@ -107,13 +107,24 @@ RSpec.describe Player do
 
       it "returns nil if player_one does not have the card" do
         card = find_card_not_in_hand(player1)
-        expect(player1.transfer_card(player1, player2, card)).to be_nil
+        expect(subject.transfer_card(player1, player2, card)).to be_nil
       end
       it "returns true" do
+        expect(subject.transfer_card(player1, player2, card)).to be true
       end
       it "removes the card from player_one's hand" do
+        expect(player1.secret_hand).to include card
+
+        subject.transfer_card(player1, player2, card)
+
+        expect(player1.secret_hand).not_to include card
       end
       it "adds the card to player_two's hand" do
+        expect(player2.secret_hand).not_to include card
+
+        subject.transfer_card(player1, player2, card)
+
+        expect(player2.secret_hand).to include card
       end
     end
   end
