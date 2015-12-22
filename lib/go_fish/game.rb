@@ -6,6 +6,7 @@ module GoFish
       @num_players = num_players
       @players = []
       @deck = Deck.new.shuffle!
+      @starting_player = pick_starting_player(num_players)
     end
 
     def create_player(name)
@@ -30,6 +31,7 @@ module GoFish
     end
 
     def turn(player)
+
     end
 
   end
