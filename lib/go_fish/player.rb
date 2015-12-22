@@ -50,22 +50,22 @@ module GoFish
     end
 
 
-    def transfer_card(player_one, player_two, chosen_card)
-        player_two.cards.secret_hand.each do |card|
-          if chosen_card == card
-            player_one.secret_hand.push(card)
-            player_two.cards.delete(card)
-          end
-        end
-    end
+    # def transfer_card(player_one, player_two, chosen_card)
+    #     player_two.cards.secret_hand.each do |card|
+    #       if chosen_card == card
+    #         player_one.secret_hand.push(card)
+    #         player_two.cards.delete(card)
+    #       end
+    #     end
+    # end
 
-    def move_to_table_hand(card_rank)
-      @secret_hand.each_with_index do |card, index|
+    def transfer_cards(transfer_from, transfer_to, card_rank)
+      transfer_from.each do |card|
         if card.rank.to_i == card_rank
-          @table_hand.cards.push(card)
+          transfer_to.cards.push(card)
         end
       end
-      @secret_hand.cards.delete(card_rank)
+      transfer_from.cards.delete(card_rank)
     end
 
     def go_fish(deck)
@@ -75,7 +75,7 @@ module GoFish
     def play_fours
       hand_to_hash.each do |card_rank, number|
         if number == 4
-          move_to_table_hand(card_rank)
+          transfer_cards(@secret_hand, @table_hand, card_rank)
         end
       end
     end
