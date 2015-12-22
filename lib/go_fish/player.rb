@@ -59,6 +59,15 @@ module GoFish
         end
     end
 
+    def move_to_table_hand(card_rank)
+      @secret_hand.each_with_index do |card, index|
+        if card.rank.to_i == card_rank
+          @table_hand.cards.push(card)
+        end
+      end
+      @secret_hand.cards.delete(card_rank)
+    end
+
     def go_fish(deck)
       @secret_hand.draw(deck,1)
     end
@@ -67,15 +76,6 @@ module GoFish
       hand_to_hash.each do |card_rank, number|
         if number == 4
           move_to_table_hand(card_rank)
-        end
-      end
-    end
-
-    def move_to_table_hand(card_rank)
-      @secret_hand.each do |card|
-        if card.rank.to_i == card_rank
-          @secret_hand.cards.delete(card)
-          @table_hand.cards.push(card)
         end
       end
     end
