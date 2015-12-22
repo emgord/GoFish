@@ -53,7 +53,20 @@ RSpec.describe Player do
       end
 
       context "and that player has this card" do
+        let(:card) { player2.secret_hand.cards[0] }
+
         it "returns true" do
+          expect(subject.ask_for_card("Test Player 2", card)).to be true
+        end
+        it "transfers all of the same-ranked cards into Player's hand" do
+          cards = player2.secret_hand.select { |c| c.rank == card.rank }
+
+          subject.ask_for_card("Test Player 2", card)
+
+          cards.each do |c|
+            expect(player1.secret_hand).to include c
+            expect(player2.secret_hand).not_to include c
+          end
         end
       end
 
@@ -78,6 +91,8 @@ RSpec.describe Player do
       let(:player2) { game.create_player("Test Player 2") }
 
       it "returns nil if player_one does not have this card" do
+        card = find_card_not_in_hand(player1.secret_hand)
+        expect(player1.transfer_card(player1, player2, card)).to be_nil
       end
       it "returns true after transferring card between players" do
       end
