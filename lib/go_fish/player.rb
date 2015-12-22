@@ -51,16 +51,29 @@ module GoFish
     end
 
     def play_fours
-      @secret_hand.each do |card|
+      hand_to_hash.each do |card_rank, number|
+        if number == 4
+          move_to_table_hand(card_rank)
+        end
+      end
     end
 
-    def hand_to_hash(hand)
+    def move_to_table_hand(card_rank)
+      @secret_hand.cards.each do |card|
+        if card.rank == card_rank
+          @secret_hand.cards.pop(card)
+          @table_hand.cards.push(card)
+        end
+      end
+    end
+
+    def hand_to_hash
       hand_hash = {}
-      hand.each do |card|
-        if hand_hash[card]
-          hand_hash[card] += 1
+      @secret_hand.each do |card|
+        if hand_hash[card.rank.to_i]
+          hand_hash[card.rank.to_i] += 1
         else
-          hand_hash[card] = 1
+          hand_hash[card.rank.to_i] = 1
         end
       end
       return hand_hash
