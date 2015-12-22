@@ -34,6 +34,19 @@ module GoFish
     end
 
     def play_fours
+      @secret_hand.each do |card|
+    end
+
+    def hand_to_hash(hand)
+      hand_hash = {}
+      hand.each do |card|
+        if hand_hash[card]
+          hand_hash[card] += 1
+        else
+          hand_hash[card] = 1
+        end
+      end
+      return hand_hash
     end
 
     def draw_five_cards(deck)
