@@ -47,12 +47,12 @@ RSpec.describe Player do
     context "when asking another player" do
       let(:player2) { game.create_player("Test Player 2") }
 
-      it "returns nil if we do not have this card" do
+      it "returns nil if we do not have the card" do
         card = find_card_not_in_hand(subject.secret_hand)
         expect(subject.ask_for_card("Test Player 2", card)).to be_nil
       end
 
-      context "and that player has this card" do
+      context "and that player has the card" do
         let(:card) { player2.secret_hand.cards[0] }
 
         it "returns true" do
@@ -70,10 +70,10 @@ RSpec.describe Player do
         end
       end
 
-      context "and that player doesn't have this card" do
+      context "and that player doesn't have the card" do
         it "returns false if we do not fish the card" do
         end
-        it "returns true if we DO fish this card" do
+        it "returns true if we DO fish the card" do
         end
       end
     end
@@ -90,7 +90,7 @@ RSpec.describe Player do
     context "when transferring to another player" do
       let(:player2) { game.create_player("Test Player 2") }
 
-      it "returns nil if player_one does not have this card" do
+      it "returns nil if player_one does not have the card" do
         card = find_card_not_in_hand(player1.secret_hand)
         expect(player1.transfer_card(player1, player2, card)).to be_nil
       end
